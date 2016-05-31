@@ -55,6 +55,6 @@
     "lodash": "^4.13.1",
     "ngprogress": "^1.1.1",
     "serve-static": "^1.10.3",
-    "ui-router": "^1.0.0-alpha.3"
+    "ui-router": "^1.0.0-alpha0"
   }
 }
