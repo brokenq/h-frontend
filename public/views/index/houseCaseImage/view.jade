@@ -1,0 +1,18 @@
+include ../../../libs/mixins/download
+include ../../../libs/mixins/preview
+include ../../../libs/mixins/block/comment
+
+.houseCaseImage: .container: .row: .col-md-offset-2.col-md-8
+  .info
+    +downloadHeader("download", "closeDownload")(ng-show="showDownload && !innerApp")
+  .image
+    img.pointer(ng-src="{{qiNiuUrl}}/{{houseCaseImage.imageKey}}-long43.high" ng-click="preview([houseCaseImage.imageKey])")
+    .tags
+      .tag(ng-repeat="tag in houseCaseImage.tags") {{tag}}
+    .desc(ng-bind="houseCaseImage.instruction")
+  +comment("comments", "commentCount")
+    .more.text-center(ng-show="innerApp && comments.hasMore")
+      a(href="javascript:void(0)" ng-click="loadMore()") 加载更多....
+    +downloadFooter("download")(ng-show="!innerApp && comments && comments.results.length > 0")
+
++preview()

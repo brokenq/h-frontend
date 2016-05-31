@@ -1,0 +1,15 @@
+mixin preview()
+  .pop(ng-show="pop.show")
+  .pop-content(ng-show="pop.show")
+    .column: img.left.pointer(src="/images/change_left.png" ng-show="pop.index != 0" ng-click="prev(pop.index)")
+    .preview
+      img.img-responsive(ng-src="{{qiNiuUrl}}/{{pop.currImage.url}}-original.high")
+      .page
+        span (
+        span.current {{pop.index + 1}}
+        span / {{pop.images.length}}
+        span )
+    .column: img.right.pointer(src="/images/change_right.png" ng-show="pop.index != pop.images.length - 1" ng-click="next(pop.index)")
+  .pop-image(ng-show="pop.showInMobile")
+    .pop-image-content(ng-show="pop.showInMobile")
+      img.img-responsive(ng-src="{{qiNiuUrl}}/{{image.url}}-original.high" ng-repeat="image in pop.images")

@@ -1,0 +1,37 @@
+include ../../../libs/mixins/download
+include ../../../libs/mixins/preview
+include ../../../libs/mixins/block/comment
+
+.houseCase: .container: .row: .col-md-offset-2.col-md-8
+  .info
+    +downloadHeader("download", "closeDownload")(ng-show="showDownload && !innerApp")
+    .title
+      .text-center.name
+        img(src="/images/tag.png" width="12")
+        span(ng-bind="houseCase.title")
+      .text-center.type
+        span(ng-bind="houseCase.roomType")
+        span {{houseCase.grossArea}}㎡
+        span.last 约{{houseCase.totalAmount}}万
+      hr
+      .person
+        .customer
+          img.img-circle(ng-src="{{qiNiuUrl}}/{{houseCase.info.customerAvatar}}-long43.high")
+          span {{houseCase.info.customerName.substring(0, 1)}}业主
+        .decoManager
+          img.img-circle(ng-src="{{qiNiuUrl}}/{{houseCase.info.decoManagerAvatar}}-long43.high")
+          span {{houseCase.info.decoManagerName.substring(0, 1)}}工长
+        .decoProcess.pull-right.pointer(ng-click="toDecoProcessPage(houseCase.projectId)")
+          img(src="/images/decoProcess.png" width="20")
+          span 施工过程
+  .image
+    img.pointer(ng-src="{{qiNiuUrl}}/{{houseCase.coverImage}}-long43.high" ng-click="preview([houseCase.coverImage])")
+    .desc(ng-bind="houseCase.coverInstruction")
+  .tags
+    span.tag(ng-repeat="tag in discuss.tagList") {{tag}}
+  +comment("comments", "commentCount")
+    .more.text-center(ng-show="innerApp && comments.hasMore")
+      a(href="javascript:void(0)" ng-click="loadMore()") 加载更多....
+    +downloadFooter("download")(ng-show="!innerApp && comments && comments.results.length > 0")
+
++preview()

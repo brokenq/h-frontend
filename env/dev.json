@@ -1,0 +1,6 @@
+{
+  "PORT": "3004",
+  "domain": "http://h-api-test.yihua.info",
+  "qiNiuUrl": "http://7xl7co.com2.z0.glb.qiniucdn.com",
+  "wxQrCodePrefix": "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket="
+}

@@ -1,0 +1,54 @@
+@import base
+@import mixin
+@import block/comment
+
+.discuss
+  .container
+    padding: 0
+    .row
+      margin: 0
+      .col-md-offset-2.col-md-8
+        padding: 0
+      +downloadHeader()
+      .content
+        background-color: #FFFFFF
+        margin-top: 10px
+        padding: 10px
+        .info
+          padding: 10px 0
+          .avatar
+            width: 40px
+            height: 40px
+            margin-right: 20px
+          .name
+            color: #FBAF24
+          .time
+            margin-top: 10px
+            span
+              color: #cccccc
+        p
+          padding: 5px 0
+        .images
+          img
+            width: 100%
+            padding-top: 10px
+        .tags
+          padding: 10px
+          .tag
+            display: inline-block
+            border: 1px solid #cccccc
+            border-radius: 4px
+            padding: 5px 10px
+            color: #AAAAAA
+            margin: 0 15px 15px 0
+            background-color: #EEEEEE
+        iframe
+          width: 100%
+      +comment()
+      +downloadFooter()
+.downloadPage
+  img
+    padding: 0 10px
+  div
+    font-weight: bold
+    font-size: 16px

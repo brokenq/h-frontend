@@ -1,0 +1,68 @@
+include ../../../libs/mixins/preview
+
+.decoProcess: .container: .row: .col-md-offset-2.col-md-8
+  .report(ng-repeat="item in progress.itemList")
+    .time-line
+      .time-point
+      span.time(ng-bind="item.dateStr")
+    .content(ng-repeat="report in item.itemList")
+      .time-line(ng-show="!$first")
+      .type(ng-show="report.type == 'LiveReport'")
+        .post-info
+          img.pull-left(ng-src="{{qiNiuUrl}}/{{report.content.liveReport.posterAvatar}}-long43.high")
+          .info
+            .name
+              span(ng-bind="report.content.liveReport.posterName")
+              img(ng-src="/images/ico-{{report.content.liveReport.fromType.toLowerCase()}}.png")
+            .time
+              span(ng-bind="report.postTime | timeConvert")
+              span @{{report.content.liveReport.checkPointName}}阶段
+        .post-content: span(ng-bind="report.content.liveReport.content")
+        .post-img
+          div(ng-show="showInMobile")
+            .row(ng-repeat="images in report.content.liveReport.images4Show")
+              .col-xs-4(ng-repeat="image in images")
+                img.img-responsive(ng-src="{{qiNiuUrl}}/{{image.url}}-long43.high")
+          div(ng-show="!showInMobile")
+            img.img-responsive.pointer(ng-click="preview(report.content.liveReport.imageList)" ng-src="{{qiNiuUrl}}/{{report.content.liveReport.imageList[0].url}}-long43.high" ng-show="report.content.liveReport.imageList && report.content.liveReport.imageList.length > 0")
+            span(ng-bind="report.content.liveReport.imageList.length")
+        hr(ng-show="report.content.communications && report.content.communications.length > 0")
+        .comment
+          .info(ng-repeat="comment in report.content.communications")
+            .inline-block.v-top-align
+              span {{comment.name}}:
+              span.reply(ng-show="comment.targetCommunicationTO") 回复
+                i {{comment.targetCommunicationTO.name}}:
+            .inline-block
+              .content(ng-bind-html="comment.content4Show")
+
+      .type(ng-show="report.type == 'CheckPoint'")
+        .post-info
+          img.pull-left(ng-src="{{qiNiuUrl}}/{{report.content.inspectorAvatar}}-long43.high")
+          .info
+            .name
+              span(ng-bind="report.content.inspectorName")
+              img(ng-src="/images/ico-check.png")
+            .time
+              span(ng-bind="report.postTime | timeConvert")
+              span @{{report.content.checkPointName}}阶段
+        //.post-content: span(ng-bind="report.content.content")
+        .post-checkPiont.pointer(ng-click="toCheckPointPage(report.content.checkPointId, report.content.checkPointName)")
+          i.horn
+          .left
+            .title: span {{report.content.name}}验收报告
+            .score
+              span(ng-repeat="i in [1,2,3,4,5]")
+                .yellow(ng-show="i <= report.content.evaluation.score") ★
+                .black(ng-show="i > report.content.evaluation.score") ★
+            .comment
+              span 业主评价: {{report.content.evaluation.content}}
+          .right
+            .inline-block {{report.content.checkItemCount}}
+            span 项
+            hr
+            span 验收通过
+  .more.text-center(ng-show="progress.hasMore")
+    a(href="javascript:void(0)" ng-click="loadMore()") 加载更多....
+
++preview()

@@ -1,0 +1,22 @@
+@import base
+@import mixin
+@import block/comment
+
+.subject
+  .container
+    padding: 0
+    .row
+      margin: 0
+      .col-md-offset-2.col-md-8
+        padding: 0
+      +downloadHeader()
+      .editor
+        background-color: #FFFFFF
+      +comment()
+      +downloadFooter()
+.downloadPage
+  img
+    padding: 0 10px
+  div
+    font-weight: bold
+    font-size: 16px

@@ -1,0 +1,144 @@
+@import base
+@import mixin
+
+.checkPoint
+  margin: 0 0 20px 0
+  .container
+    padding: 0
+    .row
+      margin: 0
+      .col-md-offset-2.col-md-8
+        padding: 0
+      +downloadHeader()
+      .header
+        padding: 30px 0 15px 0
+        margin-bottom: 10px
+        background: #FFFFFF url("/images/bg-border.jpg") repeat-x bottom center
+        .title
+          font-size: 18px
+          padding-bottom: 10px
+        .status
+          font-size: 14px
+          padding-bottom: 10px
+        .info
+          color: #cccccc
+          padding: 0 10px 10px 10px
+          font-size: 13px
+          i
+            padding-right: 5px
+      .address
+        background-color: #ffffff
+        padding: 15px 0
+        margin: 0 10px
+        .line
+          border-left: 3px solid #ffdb3d
+          padding-right: 10px
+        .icon-location
+          padding-right: 10px
+      .report
+        background-color: #ffffff
+        margin: 10px 10px 0 10px
+        .info
+          padding: 15px 0 15px 0
+          border-bottom: 1px solid #eeeeee
+          .line
+            border-left: 3px solid #ffdb3d
+            padding-right: 10px
+          img
+            padding: 5px
+      .content
+        background-color: #FFFFFF
+        padding-bottom: 10px
+        margin: 10px 10px 0 10px
+        .title
+          padding: 15px 0
+          border-bottom: 1px solid #eeeeee
+          .line
+            border-left: 3px solid #ffdb3d
+            padding-right: 10px
+          .inline-block
+            font-size: 12px
+            border: 1px solid #808080
+            border-radius: 50%
+            width: 15px
+            height: 15px
+            line-height: 15px
+            text-align: center
+            margin-right: 10px
+        .info
+          padding: 10px
+          .role
+            background-color: #ffd10a
+            border-radius: 4px
+            padding: 2px 5px
+            font-size: 12px
+            margin-right: 5px
+          .reject
+            color: #ff974d
+        .cover
+          position: relative
+          padding: 10px
+          border-bottom: 1px solid #eeeeee
+          .row
+            margin: 0 -10px 0 0
+            .col-xs-4
+              padding: 0 10px 10px 0
+              img
+                width: 100%
+              .rectify
+                position: absolute
+                top: 0
+                width: 100%
+                height: 100%
+                padding: 20px 30px 20px 20px
+                .rectify-box
+                  background: url("/images/rectification.png") center center no-repeat
+                  background-size: contain
+                  height: 100%
+          span
+            width: 30px
+            height: 20px
+            line-height: 20px
+            color: #ffffff
+            background-color: rgba(0, 0, 0, 0.5)
+            text-align: center
+            position: absolute
+            margin-top: -35px
+            right: 20px
+        .view
+          color: #cccccc
+          padding: 10px
+        .typical
+          border: 1px solid #EEEEEE
+          margin: 10px
+          .info
+            border-bottom: 1px solid #eeeeee
+            .line
+              border-left: 3px solid #000000
+              padding-right: 10px
+        .content
+          .standard
+            color: #cccccc
+            padding-bottom: 10px
+          .row
+            margin: 0 -10px 0 0
+            .col-xs-4
+              padding: 0 10px 10px 0
+      .log
+        background-color: #ffffff
+        margin: 10px
+        .info
+          padding: 15px 0
+          border-bottom: 1px solid #eeeeee
+          .line
+            border-left: 3px solid #ffdb3d
+            padding-right: 10px
+        .content
+          ul
+            list-style-type: none
+            padding-left: 10px
+            ul
+              padding-left: 20px
+      +downloadFooter()
+
++preview()

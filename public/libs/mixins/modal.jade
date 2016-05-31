@@ -1,0 +1,12 @@
+mixin modalHeader(title)
+  .modal-header: h4.modal-title
+    span.info #{title}
+    button.close(type="button" ng-click="close()") x
+
+mixin modalBody()
+  .modal-body
+    block
+
+mixin modalFooter()
+  .modal-footer
+    block

@@ -1,0 +1,10 @@
+include ../../../libs/mixins/download
+include ../../../libs/mixins/block/comment
+
+.subject: .container: .row: .col-md-offset-2.col-md-8
+  +downloadHeader("download", "closeDownload")(ng-show="showDownload && !innerApp")
+  #editor.editor
+  +comment("comments", "commentCount")
+    .more.text-center(ng-show="innerApp && comments.hasMore")
+      a(href="javascript:void(0)" ng-click="loadMore()") 加载更多....
+  +downloadFooter("download")(ng-show="!innerApp && comments.results.length > 0")

@@ -1,0 +1,68 @@
+include ../../../../libs/mixins/download
+include ../../../../libs/mixins/preview
+
+.checkPoint: .container: .row: .col-md-offset-2.col-md-8
+  +downloadHeader("download", "closeDownload")(ng-show="showDownload && !innerApp")
+  if !isDecoProcessCheckPoint
+    .header(ng-show="checkPoint.checkPointStatus == 'CHECKED'")
+      .title.text-center {{checkPoint.checkPointName}}阶段验收报告
+      .status.text-center ( {{checkPoint.checkPointStatus | checkPointStatus}} )
+      .info
+        i.icon-info
+        span 请查看下方的验收报告并确认验收, 确认后系统将帮您完成该阶段工程款的结算
+  .address
+    i.line
+    i.icon-location
+    span {{project.info.community}} {{project.info.address}}
+  if !isDecoProcessCheckPoint
+    .report(ng-show="checkPoint.checkPointStatus == 'CHECKED' || checkPoint.checkPointStatus == 'PAID'")
+      .info
+        i.line
+        span 纸质验收报告
+      img.img-responsive.pointer(ng-src="{{qiNiuUrl}}/{{checkPoint.receivedImage.url}}-long43.high" ng-click="preview([checkPoint.receivedImage], 0)")
+  .content(ng-repeat="checkPointItem in checkPoint.checkItemReportList")
+    .title
+      i.line
+      .inline-block {{$index + 1}}
+      span 验收项: {{checkPointItem.checkItem.name}}
+    .info
+      span.role 工长
+      span : {{checkPointItem.comment}}
+    .cover
+      .row(ng-repeat="images in checkPointItem.checkImages4Show")
+        .col-xs-4(ng-repeat="image in images")
+          .rectify.pointer(ng-show="image.status == 'WITH_BUG'" ng-click="preview(checkPointItem.checkImageList, $index)")
+            .rectify-box
+          img.img-responsive.pointer(ng-click="preview(checkPointItem.checkImageList, $index)" ng-src="{{qiNiuUrl}}/{{image.url}}-long43.high")
+    .info(ng-show="checkPointItem.inspectComment")
+      span.role 巡检 :
+      span(ng-show="checkPoint.checkPointStatus == 'REJECT'").reject {{checkPointItem.inspectComment}}
+      span(ng-show="checkPoint.checkPointStatus != 'REJECT'") {{checkPointItem.inspectComment}}
+    .cover.no-border(ng-show="checkPointItem.inspectImageList.length > 0")
+      .row(ng-repeat="images in checkPointItem.inspectImage4Show")
+        .col-xs-4(ng-repeat="image in images")
+          img.img-responsive.pointer(ng-click="preview(checkPointItem.inspectImageList, $index)" ng-src="{{qiNiuUrl}}/{{image.url}}-long43.high")
+    .view.pointer(ng-click="checkPointItem.showTypical = !checkPointItem.showTypical" ng-show="!checkPointItem.showTypical") 点击查看验收标准
+    .typical(ng-show="checkPointItem.showTypical")
+      .info
+        i.line
+        span 验收标准
+        .pull-right
+          img.pointer(src="/images/close.png" ng-click="checkPointItem.showTypical = !checkPointItem.showTypical" width=20)
+      .content
+        .standard {{checkPointItem.checkItem.standard}}
+        .row(ng-repeat="images in checkPointItem.checkItem.typicalImages4Show")
+          .col-xs-4(ng-repeat="image in images")
+            img.img-responsive(ng-click="preview(checkPointItem.checkItem.typicalImageList, $index)" ng-src="{{qiNiuUrl}}/{{image.url}}-long43.high")
+  .log
+    .info
+      i.line
+      span 验收日志
+    .content
+      ul(ng-repeat="log in checkPoint.logs")
+        li {{log.postTime | date: 'yyyy/MM/dd'}} {{log.postName}}
+        ul(ng-repeat="logItem in log.logItems" ng-if="log.postType == 'reject'")
+          li {{logItem.checkItemName}}
+            span(ng-if="log.postType == 'reject'") {{logItem.comment}}
+
++preview()

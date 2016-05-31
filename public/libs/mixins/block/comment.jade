@@ -1,0 +1,18 @@
+mixin comment(comments, commentCount)
+  .comment(ng-show="#{comments} && #{comments}.results.length > 0")
+    .count
+      img(src="/images/comment.png")
+      span 评论 ( {{#{commentCount}}} )
+    .item(ng-repeat="item in #{comments}.results")
+      img.img-circle.v-top-align(ng-src="{{item.userAvatar}}" width="40")
+      .commentor
+        .name
+          span(ng-bind="item.userName")
+          span.createTime(ng-bind="item.createTime | timeConvert")
+        .comment-content
+          .inline-block(ng-show="item.targetCommentResp")
+            span 回复
+            span.target {{item.targetCommentResp.userName}}
+            span :
+          span(ng-bind-html="item.content4Show")
+    block

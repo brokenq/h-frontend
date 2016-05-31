@@ -1,0 +1,29 @@
+.page-body.p10
+  .left-25.pr10
+    //img(ng-if="team.decoManager.avatar=null")
+    img.img-portrait(ng-if="team.decoManager.avatar == null || team.decoManager.avatar == ''" src="/images/worker_default.png")
+    img.img-portrait(ng-if="team.decoManager.avatar != null && team.decoManager.avatar != ''" src="{{qiNiuUrl}}/{{team.decoManager.avatar}}-thumb.high")
+  .left-75-nomal.with70p
+    div.text-left.float-box
+      div.float-left
+        strong.dm-name {{team.decoManager.name}}
+        span.dm-post 工长
+      div.float-right
+        span.dm-phone
+          i.icon-phone_iphone
+          | {{team.decoManager.mobile}}
+    p.clear.dm-recommend
+      span {{team.decoManager.descript}}
+div(ng-repeat="worker in team.decoWorkers")
+  .page-body.p10
+    .left-25.p10
+      img.img-portrait(ng-if="worker.avatar == null || worker.avatar == ''" src="/images/worker_default.png")
+      img.img-portrait(ng-if="worker.avatar != null && worker.avatar != ''" src="{{qiNiuUrl}}/{{worker.avatar}}-thumb.high")
+    .left-left-75-nomal.with70p
+      div.text-left
+        strong.dm-name {{worker.name}}
+        span.dw-post {{worker.workCategory}}
+      div: span {{worker.descript}}
+.no-worker.page-body.pb10(ng-show="team.decoWorkers.length==0")
+  img.block-all.img-circle(src="/images/no-woker.png")
+  p.text-center.c-c8c7c7.f-18 工长大人太忙了~还没有添加工人呢~

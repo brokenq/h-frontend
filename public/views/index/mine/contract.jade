@@ -1,0 +1,4 @@
+.contract: .container: .row: .col-md-offset-2.col-md-8
+  .content
+    img.img-responsive.pointer(ng-src="{{qiNiuUrl}}/{{image.url}}-original.high" ng-repeat="image in project.contractImageList" ng-click="preview(project.contractImageList, $index)")
+

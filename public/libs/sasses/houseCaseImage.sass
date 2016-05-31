@@ -1,0 +1,53 @@
+@import base
+@import mixin
+@import block/comment
+
+.houseCaseImage
+  .container
+    padding: 0
+    .row
+      margin: 0
+      .col-md-offset-2.col-md-8
+        padding: 0
+      .info
+        line-height: 100%
+        background-color: #FFFFFF
+        +downloadHeader()
+      .image
+        margin-top: 10px
+        background-color: #FFFFFF
+        img
+          width: 100%
+        .tags
+          margin: 15px 15px 0 15px
+          .tag
+            display: inline-block
+            border: 1px solid #cccccc
+            border-radius: 4px
+            padding: 5px 10px
+            color: #AAAAAA
+            margin: 0 15px 15px 0
+        .desc
+          margin: 0 15px 15px 15px
+          padding-bottom: 15px
+      .tags
+        padding: 10px
+        .tag
+          display: inline-block
+          border: 1px solid #cccccc
+          border-radius: 4px
+          padding: 5px 10px
+          color: #AAAAAA
+          margin: 0 15px 15px 0
+          background-color: #EEEEEE
+      +comment()
+      +downloadFooter()
+      .more
+        font-size: 16px
+        padding: 20px
+.downloadPage
+  img
+    padding: 0 10px
+  div
+    font-weight: bold
+    font-size: 16px

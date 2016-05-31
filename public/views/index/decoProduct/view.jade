@@ -1,0 +1,30 @@
+include ../../../libs/mixins/download
+
+mixin calculate(base)
+  .calculate
+    .intro.text-center
+      img(src="/images/angle.png")
+      span 为您报价
+    .input
+      input.form-control.inline-block(type="number" placeholder="房间面积" ng-model="roomArea")
+      span x {{base}} 元 / ㎡
+    p.num.text-center(ng-show="result > 0") {{result}}
+      span 元
+    button.btn(ng-click="calculate(roomArea)") 计算价格
+    .result
+      span 不足80平米, 按80平米计价
+
+.decoProduct: .container: .row: .col-md-offset-2.col-md-8
+  +downloadHeader("download", "closeDownload")(ng-show="showDownload && !innerApp")
+  .content(ng-if="base == '198'")
+    img(src="/images/198-1.png")
+    img(src="/images/198-2.png")
+    img(src="/images/198-3.png")
+    +calculate()
+
+  .content(ng-if="base == '499'")
+    img(src="/images/499-1.png")
+    img(src="/images/499-2.png")
+    img(src="/images/499-3.png")
+    img(src="/images/499-4.png")
+    +calculate()

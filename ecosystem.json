@@ -1,0 +1,28 @@
+{
+  "apps": [
+    {
+      "name": "h-frontend",
+      "script": "./bin/www",
+      "source_map_support": true,
+      "env": {
+        "COMMON_VARIABLE": true
+      },
+      "env_dev": {
+        "NODE_ENV": "dev"
+      }
+    }
+  ],
+  "deploy": {
+    "dev": {
+      "user": "root",
+      "host": "121.41.81.224",
+      "ref": "origin/dev",
+      "repo": "git@git.oschina.net:xiexing_yh/h-frontend.git",
+      "path": "/data/projects/h-frontend",
+      "post-deploy" : "npm install ; bin/build.sh dev",
+      "env": {
+        "NODE_ENV": "dev"
+      }
+    }
+  }
+}

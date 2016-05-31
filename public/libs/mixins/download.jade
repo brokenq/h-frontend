@@ -1,0 +1,11 @@
+mixin downloadHeader(action, closeAction)
+  .download-header&attributes(attributes)
+    img.pointer(src="/images/close.png" ng-click="#{closeAction}()" width="20")
+    img(src="/images/app_logo.png" width="60")
+    span.name 胖鸟APP 一 买得到的样板房
+    .pull-right
+      button.btn(ng-click="#{action}()") 立即下载
+
+mixin downloadFooter(action)
+  .download-footer.text-center&attributes(attributes)
+    a(href="javascript:void(0)" ng-click="#{action}()" ng-show="!innerApp") 查看更多评论请下载胖鸟APP

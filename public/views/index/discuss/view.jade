@@ -1,0 +1,22 @@
+include ../../../libs/mixins/download
+include ../../../libs/mixins/video
+include ../../../libs/mixins/block/comment
+
+.discuss: .container: .row: .col-md-offset-2.col-md-8
+  +downloadHeader("download", "closeDownload")(ng-show="showDownload && !innerApp")
+  .content
+    .info
+      img.avatar.img-circle(ng-src="{{qiNiuUrl}}/{{discuss.ownerAvatar}}-long43.high")
+      span.name {{discuss.ownerName}}
+      .time.pull-right
+        span {{discuss.lastCommentTime | date: 'yyyy-MM-dd H:mm'}}
+    p(ng-bind-html="discuss.content4Show")
+    .text-center
+      +video("http://player.youku.com/embed/XMTU4MzM5NTg2NA==")
+    .images: img(ng-src="{{qiNiuUrl}}/{{image}}-long43.high" ng-repeat="image in discuss.imageList")
+    .tags
+      span.tag(ng-repeat="tag in discuss.tagList") {{tag}}
+  +comment("comments", "commentCount")
+    .more.text-center(ng-show="innerApp && comments.hasMore")
+      a(href="javascript:void(0)" ng-click="loadMore()") 加载更多....
+  +downloadFooter("download")(ng-show="!innerApp && comments.results.length > 0")

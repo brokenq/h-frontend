@@ -1,0 +1,77 @@
+@import base
+@import mixin
+@import block/comment
+
+.houseCase
+  .container
+    padding: 0
+    .row
+      margin: 0
+      .col-md-offset-2.col-md-8
+        padding: 0
+      .info
+        line-height: 100%
+        background-color: #FFFFFF
+        +downloadHeader()
+        .title
+          .name
+            padding-top: 50px
+            margin: 0 0 20px 0
+            img
+              padding-bottom: 10px
+              margin-right: 10px
+            span
+              font-size: 24px
+              font-weight: bold
+          .type
+            margin-bottom: 20px
+            span
+              font-size: 16px
+              color: #b2b2b2
+              padding: 0 15px
+              border-right: 2px solid #b2b2b2
+            .last
+              border: none
+          hr
+            margin-bottom: 0
+            width: 95%
+          .person
+            padding: 20px 15px
+            .customer, .decoManager
+              display: inline-block
+              img
+                width: 40px
+                height: 40px
+                margin-right: 10px
+              span
+                margin-right: 15px
+            .decoProcess
+              margin-top: 5px
+              height: 30px
+              line-height: 30px
+              width: 100px
+              border: 1px solid #f4f1f0
+              border-radius: 20px
+              color: #b0b0b0
+              img
+                margin-left: 10px
+                padding-right: 5px
+      .image
+        margin-top: 10px
+        background-color: #FFFFFF
+        img
+          width: 100%
+        .desc
+          margin: 15px
+          padding-bottom: 15px
+      +comment()
+      +downloadFooter()
+      .more
+        font-size: 16px
+        padding: 20px
+.downloadPage
+  img
+    padding: 0 10px
+  div
+    font-weight: bold
+    font-size: 16px

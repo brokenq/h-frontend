@@ -1,0 +1,29 @@
+mixin improvingImage
+  span.bg-red.position-absolute.font-white.font-bold.improve-image&attributes(attributes) 待整改
+
+mixin content
+  .row.m10.well-sm.content-bg&attributes(attributes)
+    block
+
+mixin imageStyle(url)
+  .row
+    img.ml10(src="#{url}" width="25" height="20")
+    block
+  hr.hr1.mb-10.mt0
+
+mixin contentBg()
+  .well-sm.mt10.pt0.pb0.content-bg&attributes(attributes)
+    block
+
+mixin describeBg(describe)
+  .well-sm.mt10.pt0.pb0.desc-bg
+    span #{describe}
+
+mixin imageRow()
+  .row.pt15
+    .col-xs-4.pl5.pr5.pt0.pb0&attributes(attributes)
+      img.img-rounded.img-responsive(src="{{qiNiuUrl}}/{{image.url}}?imageMogr2/thumbnail/190x150!")
+
+mixin imageList(action)
+  .row&attributes(attributes)
+    img.img-rounded.m10(src="{{qiNiuUrl}}/{{image.url}}?imageMogr2/thumbnail/190x150!" ng-click="action('{{image.url}}')")

@@ -1,0 +1,36 @@
+.project-name 我的装修款
+.pay-outline
+  dl.pay-total
+    dt {{payment.totalAmount | amountFormatter: '##,###,###'}}
+    dd 装修总款
+  div.pay-paid
+    dl
+      dt.c-ff974d {{payment.paidAmount | amountFormatter: '##,###,###'}}
+      dd （结算）
+    dl
+      dt {{payment.totalAmount - payment.paidAmount | amountFormatter: '##,###,###'}}
+      dd （剩余）
+//.text-center.pb10(id="indicatorContainer")
+//.text-center.pb15.font-grey.font14: span 工程总款：¥ {{payment.total | amountFormatter: '##,###,###'}}
+ul.page-body.pay-list
+  li(ng-repeat="item in payment.pointPaymentList")
+    h4.pull-left {{item.name}}
+    strong.pull-left(class="pay-list-{{item.status | lowercase}}") {{item.amount | amountFormatter: '##,###,###'}}
+    //{{item.payTime | date: 'yyyy.M.d'}}
+
+    span.pull-right(ng-if="item.status == '已结算'")
+      em
+        i.icon-check
+      | 已结算
+    span.pull-right(ng-if="item.status == '未结算'")
+      em.unpaid
+        i.icon-remove
+      | 未结算
+.page-body(ng-if="payment.logList.length > 0")
+  h5.text-center.c-c8c7c7.b-bot 结算记录
+  ul.pay-log
+    li(ng-repeat="log in payment.logList")
+      em.mr15.f-s-normal.c-c8c7c7 {{log.payTime | date: 'MM/dd H:mm'}}
+      span {{log.name}}
+      strong.pull-right.c-ff974d {{log.amount}}
+      //strong.pull-right(ng-if="log.amount<0") -{{log.amount}}
