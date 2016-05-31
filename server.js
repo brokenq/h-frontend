@@ -2,7 +2,9 @@ var path = require('path');
 var app = require('connect')();
 
 app.use(require('connect-livereload')());
-app.use(require('serve-static')(__dirname, {'index': ['dist/views/index.html']}));
+//app.use(require('serve-static')(__dirname, {'index': ['dist/views/index.html']}));
+app.use(require('serve-static')(path.join(__dirname, 'dist'), {'index': ['views/index.html']}));
+app.use(require('serve-static')(__dirname));
 
 var server = app.listen(3000, function () {
 

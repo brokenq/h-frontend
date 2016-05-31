@@ -9,6 +9,6 @@ angular.module 'decoProduct.index', ['decoProduct']
     resolve: $setTitle: ($rootScope)-> $rootScope.$title = "装修产品介绍"
   .state 'index.decoProduct.view',
     url: '/:decoProductId'
-    templateUrl: '/index/decoProduct/view.html'
+    templateUrl: 'views/index/decoProduct/view.html'
     controller: 'DecoProductViewCtrl'
     resolve: $setTitle: ($rootScope)-> $rootScope.$title = "装修产品介绍"

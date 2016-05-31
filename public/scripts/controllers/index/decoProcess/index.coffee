@@ -9,11 +9,11 @@ angular.module 'decoProcess.index', ['decoProcess']
     resolve: $setTitle: ($rootScope)-> $rootScope.$title = "施工过程"
   .state 'index.decoProcess.view',
     url: '/:decoProcessId'
-    templateUrl: '/index/decoProcess/view.html'
+    templateUrl: 'views/index/decoProcess/view.html'
     controller: 'DecoProcessViewCtrl'
     resolve: $setTitle: ($rootScope)-> $rootScope.$title = "施工过程"
   .state 'index.decoProcess.checkPoint',
     url: '/checkPoint/:checkPointId'
-    templateUrl: '/index/decoProcess/checkPoint.html'
+    templateUrl: 'views/index/decoProcess/checkPoint.html'
     controller: 'DecoProcessCheckPointViewCtrl'
     resolve: $setTitle: ($rootScope)-> $rootScope.$title = "验收报告"

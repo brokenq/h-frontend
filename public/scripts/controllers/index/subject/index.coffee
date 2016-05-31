@@ -9,6 +9,6 @@ angular.module 'subject.index', ['subject']
     resolve: $setTitle: ($rootScope)-> $rootScope.$title = "专题"
   .state 'index.subject.view',
     url: '/:subjectId'
-    templateUrl: '/index/subject/view.html'
+    templateUrl: 'views/index/subject/view.html'
     controller: 'SubjectViewCtrl'
     resolve: $setTitle: ($rootScope)-> $rootScope.$title = "专题"

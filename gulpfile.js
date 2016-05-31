@@ -14,6 +14,9 @@ var concat = require('gulp-concat');
 var rev = require('gulp-rev');
 var replace = require('gulp-replace');
 var inject = require('gulp-inject');
+var wiredep = require('wiredep').stream;
+var usemin = require('gulp-usemin');
+var minifyCss = require('gulp-minify-css');
 
 // 启动服务
 gulp.task('connect', function() {
@@ -62,7 +65,7 @@ gulp.task('concatJs', function () {
    var stream = gulp.src('dist/libs/scripts/**/*.js')
        .pipe(concat('libs.js'))
        .pipe(uglify({compress: true, mangle: false}))
-       .pipe(gulp.dest('dist/libs'))
+       .pipe(gulp.dest('dist/libs'));
    return gulp.src('dist/scripts/**/*.js')
        .pipe(concat('main.js'))
        .pipe(uglify({compress: true, mangle: false}))
@@ -103,14 +106,34 @@ gulp.task('copy', function () {
 gulp.task('rev', function () {
    return gulp.src('dist/libs/*').pipe(rev()).pipe(gulp.dest('dist/libs'))
 });
+// min
+gulp.task('usemin', function () {
+   return gulp.src('dist/views/index.html')
+     .pipe(usemin({
+       css: [minifyCss(), rev()],
+       jsVendor: [uglify({mangle: false}), rev()],
+       jsMain: [uglify({mangle: false}), rev()]
+     }))
+     .pipe(gulp.dest('dist/views'))
+});
 // index inject
 gulp.task('inject', function() {
    var target = gulp.src('dist/views/index.html');
    var sources = gulp.src(['dist/**/*.js', 'dist/**/*.css'], {read: false});
-   return target.pipe(inject(sources)).pipe(gulp.dest('dist/views'));
+   return target.pipe(inject(sources, {relative: true})).pipe(gulp.dest('dist/views'));
+});
+// npm package inject
+gulp.task('bower', function () {
+   return gulp.src('dist/views/index.html')
+     .pipe(wiredep({
+        directory: 'node_modules',
+        bowerJson: require('./package.json')
+     }))
+     .pipe(gulp.dest('dist/views'))
 });
 
 gulp.task('default', sequence('del', 'coffee', 'setEnvVariable', 'concatJs'));
+gulp.task('test', sequence('del', 'jade', 'coffee', 'inject', 'bower', 'usemin'));
 gulp.task('serve', sequence(
     'del',
     'coffee',
@@ -124,7 +147,8 @@ gulp.task('serve', sequence(
     //'concatCss',
     'imagemin',
     'copy',
+    'bower',
     'inject',
-    //'rev',
+    'usemin',
     'connect'
 ));

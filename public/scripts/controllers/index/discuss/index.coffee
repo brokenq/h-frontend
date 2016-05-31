@@ -9,6 +9,6 @@ angular.module 'discuss.index', ['discuss']
     resolve: $setTitle: ($rootScope)-> $rootScope.$title = "交流"
   .state 'index.discuss.view',
     url: '/:discussId'
-    templateUrl: '/index/discuss/view.html'
+    templateUrl: 'views/index/discuss/view.html'
     controller: 'DiscussViewCtrl'
     resolve: $setTitle: ($rootScope)-> $rootScope.$title = "交流"

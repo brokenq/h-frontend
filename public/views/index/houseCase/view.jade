@@ -7,7 +7,7 @@ include ../../../libs/mixins/block/comment
     +downloadHeader("download", "closeDownload")(ng-show="showDownload && !innerApp")
     .title
       .text-center.name
-        img(src="/images/tag.png" width="12")
+        img(src="libs/images/tag.png" width="12")
         span(ng-bind="houseCase.title")
       .text-center.type
         span(ng-bind="houseCase.roomType")
@@ -22,7 +22,7 @@ include ../../../libs/mixins/block/comment
           img.img-circle(ng-src="{{qiNiuUrl}}/{{houseCase.info.decoManagerAvatar}}-long43.high")
           span {{houseCase.info.decoManagerName.substring(0, 1)}}工长
         .decoProcess.pull-right.pointer(ng-click="toDecoProcessPage(houseCase.projectId)")
-          img(src="/images/decoProcess.png" width="20")
+          img(src="libs/images/decoProcess.png" width="20")
           span 施工过程
   .image
     img.pointer(ng-src="{{qiNiuUrl}}/{{houseCase.coverImage}}-long43.high" ng-click="preview([houseCase.coverImage])")

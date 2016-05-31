@@ -48,7 +48,7 @@ include ../../../../libs/mixins/preview
         i.line
         span 验收标准
         .pull-right
-          img.pointer(src="/images/close.png" ng-click="checkPointItem.showTypical = !checkPointItem.showTypical" width=20)
+          img.pointer(src="libs/images/close.png" ng-click="checkPointItem.showTypical = !checkPointItem.showTypical" width=20)
       .content
         .standard {{checkPointItem.checkItem.standard}}
         .row(ng-repeat="images in checkPointItem.checkItem.typicalImages4Show")

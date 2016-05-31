@@ -13,6 +13,6 @@ angular.module 'index.index', [
   $stateProvider
   .state 'index',
     url: '/index'
-    templateUrl: '/index/index.html'
+    templateUrl: 'views/index/index.html'
     controller: 'IndexCtrl'
     resolve: $setTitle: ($rootScope)-> $rootScope.$title = "首页"

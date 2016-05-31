@@ -9,6 +9,6 @@ angular.module 'houseCase.index', ['houseCase']
     resolve: $setTitle: ($rootScope)-> $rootScope.$title = "样板房"
   .state 'index.houseCase.view',
     url: '/:houseCaseId'
-    templateUrl: '/index/houseCase/view.html'
+    templateUrl: 'views/index/houseCase/view.html'
     controller: 'HouseCaseViewCtrl'
     resolve: $setTitle: ($rootScope)-> $rootScope.$title = "样板房详情"

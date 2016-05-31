@@ -5,53 +5,23 @@ head
   meta(name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,user-scalable=0,minimum-scale=1.0,maximum-scale=1.0")
   meta(name="format-detection" content="telephone=no")
   title(ng-bind="$title")
-  //link(rel="stylesheet" type="text/css" href="/vendors/bootstrap/dist/css/bootstrap.css")
-  //link(rel="stylesheet" type="text/css" href="/vendors/angular-dialog-service/dist/dialogs.css")
-  //link(rel="stylesheet" type="text/css" href="/vendors/quill/dist/quill.base.css")
-  //link(rel="stylesheet" type="text/css" href="/vendors/quill/dist/quill.snow.css")
-  //link(rel="stylesheet" type="text/css" href="/vendors/emoji/lib/emoji.css")
-  //link(rel="stylesheet" type="text/css" href="/vendors/angular-loading-bar/build/loading-bar.css")
-  //link(rel="stylesheet" type="text/css" href="/vendors/ngprogress/ngProgress.css")
-  //link(rel="stylesheet" type="text/css" href="/styles/icon.css")
-  //link(rel="stylesheet" type="text/css" href="/styles/decoProcess.css")
-  //link(rel="stylesheet" type="text/css" href="/styles/checkPoint.css")
-  //link(rel="stylesheet" type="text/css" href="/styles/houseCase.css")
-  //link(rel="stylesheet" type="text/css" href="/styles/subject.css")
-  //link(rel="stylesheet" type="text/css" href="/styles/houseCaseImage.css")
-  //link(rel="stylesheet" type="text/css" href="/styles/callCenter.css")
-  //link(rel="stylesheet" type="text/css" href="/styles/projectQrCode.css")
-  //link(rel="stylesheet" type="text/css" href="/styles/contract.css")
-  //link(rel="stylesheet" type="text/css" href="/styles/discuss.css")
-  //link(rel="stylesheet" type="text/css" href="/styles/decoProduct.css")
-  //link(rel="stylesheet" type="text/css" href="/styles/index.css")
-  link(rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.css")
-  link(rel="stylesheet" type="text/css" href="/node_modules/angular-dialog-service/dist/dialogs.css")
-  link(rel="stylesheet" type="text/css" href="/node_modules/quill/dist/quill.base.css")
-  link(rel="stylesheet" type="text/css" href="/node_modules/quill/dist/quill.snow.css")
-  link(rel="stylesheet" type="text/css" href="/node_modules/emoji/lib/emoji.css")
-  link(rel="stylesheet" type="text/css" href="/node_modules/angular-loading-bar/build/loading-bar.css")
-  link(rel="stylesheet" type="text/css" href="/node_modules/ngprogress/ngProgress.css")
+
+  // build:css ../css/main.css
+  // bower:css
+  // endbower
 
   // inject:css
   // endinject
+  // endbuild
 body
   div(ui-view='')
 
-  script(type="text/javascript" src="/node_modules/jquery/dist/jquery.js")
-  script(type="text/javascript" src="/node_modules/angular/angular.js")
-  script(type="text/javascript" src="/node_modules/angular-resource/angular-resource.js")
-  script(type="text/javascript" src="/node_modules/ui-router/release/angular-ui-router.js")
-  script(type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.js")
-  script(type="text/javascript" src="/node_modules/jquery-touchswipe/jquery.touchSwipe.js")
-  script(type="text/javascript" src="/node_modules/angular-sanitize/angular-sanitize.js")
-  script(type="text/javascript" src="/node_modules/angular-translate/dist/angular-translate.js")
-  script(type="text/javascript" src="/node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js")
-  script(type="text/javascript" src="/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js")
-  script(type="text/javascript" src="/node_modules/angular-dialog-service/dist/dialogs.js")
-  script(type="text/javascript" src="/node_modules/angular-dialog-service/dist/dialogs-default-translations.js")
-  script(type="text/javascript" src="/node_modules/quill/dist/quill.js")
-  script(type="text/javascript" src="/node_modules/ngprogress/build/ngProgress.js")
-  script(type="text/javascript" src="/node_modules/emoji/lib/emoji.js")
+  // build:jsVendor ../js/vendor.js
+  // bower:js
+  // endbower
+  // endbuild
+
+  // build:jsMain ../js/main.js
   // inject:js
   // endinject
-  //script(data-main="/scripts/require-config.js" src="/vendors/requirejs/require.js")
+  // endbuild

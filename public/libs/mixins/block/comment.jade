@@ -1,7 +1,7 @@
 mixin comment(comments, commentCount)
   .comment(ng-show="#{comments} && #{comments}.results.length > 0")
     .count
-      img(src="/images/comment.png")
+      img(src="libs/images/comment.png")
       span 评论 ( {{#{commentCount}}} )
     .item(ng-repeat="item in #{comments}.results")
       img.img-circle.v-top-align(ng-src="{{item.userAvatar}}" width="40")
