@@ -1,12 +1,15 @@
 var path = require('path');
 var app = require('connect')();
+var favicon = require('serve-favicon');
+//require('config')();
 
+app.use(favicon(path.join(__dirname, "favicon.ico")));
 app.use(require('connect-livereload')());
-//app.use(require('serve-static')(__dirname, {'index': ['dist/views/index.html']}));
 app.use(require('serve-static')(path.join(__dirname, 'dist'), {'index': ['views/index.html']}));
 app.use(require('serve-static')(__dirname));
 
-var server = app.listen(3000, function () {
+var port = process.env.PORT || 3004;
+var server = app.listen(port, function () {
 
     var host = server.address().address;
     var port = server.address().port;

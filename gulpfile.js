@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var del = require('del');
 
-var liveServer = require('gulp-live-server');
+var server = require('gulp-live-server')('server.js');
 var sequence = require('gulp-sequence').use(gulp);
 var coffee = require('gulp-coffee');
 var uglify = require('gulp-uglify');
@@ -17,29 +17,87 @@ var inject = require('gulp-inject');
 var wiredep = require('wiredep').stream;
 var usemin = require('gulp-usemin');
 var minifyCss = require('gulp-minify-css');
+var watchPath = require('gulp-watch-path');
+var profile = process.argv[4];
+
+var appPath = {
+    'public': {
+        'dir': 'public/',
+        'views': 'public/views/**/*.jade',
+        'scripts': 'public/scripts/**/*.coffee',
+        'libs': {
+            'dir': 'public/lib/',
+            'fonts': 'public/libs/fonts/*',
+            'images': 'public/libs/images/*',
+            'sasses': 'public/libs/sasses/**/*.sass',
+            'scripts': 'public/libs/scripts/**/*.coffee'
+        }
+    },
+    'dist': {
+        'dir': 'dist/',
+        'views': 'dist/views',
+        'scripts': 'dist/scripts',
+        'libs': {
+            'dir': 'dist/libs',
+            'fonts': 'dist/libs/fonts',
+            'images': 'dist/libs/images',
+            'sasses': 'dist/libs/sasses',
+            'scripts': 'dist/libs/scripts'
+        }
+    }
+};
 
 // 启动服务
 gulp.task('connect', function() {
-   var server = liveServer('server.js');
-   server.start().then(function(result) {
-      console.log('Server exited with result:', result);
-      process.exit(result.code);
-   });
-   //gulp.watch(['static/**/*.css', 'static/**/*.html'], server.notify);
-   //gulp.watch('server.js', server.start);
+    server.start().then(function(result) {
+        console.log('Server exited with result:', result);
+        process.exit(result.code);
+    });
+});
+// watch
+gulp.task('watch', function () {
+    gulp.watch(['public/**/*.{jade,coffee,sass,png,jpg,jpeg}'], function (event) {
+        var paths = watchPath(event, 'public/', 'dist/');
+        var suffix = paths.srcFilename.substring(paths.srcFilename.indexOf('.') + 1);
+        console.log(suffix);
+        console.log(paths);
+        switch(suffix) {
+            case 'jade':
+                gulp.src(paths.srcPath).pipe(jade()).pipe(gulp.dest(paths.distDir));
+                break;
+            case 'coffee':
+                gulp.src(paths.srcPath).pipe(coffee({bare: true})).pipe(gulp.dest(paths.distDir));
+                break;
+            case 'sass':
+                sass(paths.srcPath).pipe(gulp.dest('dist/libs/css'));
+                gulp.src('dist/libs/css').pipe(autoprefixer()).pipe(gulp.dest('dist/libs/css'));
+                break;
+            case 'png':
+            case 'jpg':
+            case 'jpeg':
+                gulp.src(paths.srcPath).pipe(imagemin()).pipe(gulp.dest(paths.distDir));
+                break;
+        }
+    });
+    gulp.watch(['dist/**/*'], function (file) {
+        server.notify.apply(server, [file]);
+    });
 });
 // 设置环境变量
-gulp.task('setEnvVariable', function() {
-   var profile = require('./env/dev');
+gulp.task('env', function() {
+   var env = require('./env/' + profile);
    var stream = gulp.src('dist/libs/scripts/constants.js');
-   for (var key in profile) {
-      stream = stream.pipe(replace('@@'+key, profile[key])).pipe(gulp.dest('dist/libs/scripts'))
+   for (var key in env) {
+      stream = stream.pipe(replace('@@'+key, env[key])).pipe(gulp.dest('dist/libs/scripts'))
    }
    return stream
 });
 // 删除dist文件夹
-gulp.task('del', function () {
+gulp.task('del:dist', function () {
    return del(['dist'])
+});
+gulp.task('del:clean', function () {
+   return del(['dist/scripts', 'dist/libs/scripts', 'dist/libs/css/**/*', '!dist/libs/css/main*.css'])
 });
 // coffee编译
 gulp.task('coffee', function () {
@@ -96,11 +154,11 @@ gulp.task('concatCss', function() {
 });
 // 图片压缩
 gulp.task('imagemin', function() {
-   return gulp.src('public/libs/images/*').pipe(imagemin()).pipe(gulp.dest('dist/libs/images'))
+   return gulp.src('public/libs/images/**/*').pipe(imagemin()).pipe(gulp.dest('dist/libs/images'))
 });
 // copy fonts
-gulp.task('copy', function () {
-   return gulp.src('public/libs/fonts/*').pipe(gulp.dest('dist/libs/fonts'))
+gulp.task('copyFonts', function () {
+    return gulp.src('public/libs/fonts/*').pipe(gulp.dest('dist/libs/fonts'))
 });
 // 添加版本号
 gulp.task('rev', function () {
@@ -132,23 +190,15 @@ gulp.task('bower', function () {
      .pipe(gulp.dest('dist/views'))
 });
 
-gulp.task('default', sequence('del', 'coffee', 'setEnvVariable', 'concatJs'));
-gulp.task('test', sequence('del', 'jade', 'coffee', 'inject', 'bower', 'usemin'));
-gulp.task('serve', sequence(
-    'del',
-    'coffee',
-    'setEnvVariable',
-    'uglify',
-    //'concatJs',
-    'jade',
-    'sass',
-    'autoprefixer',
-    'cssmin',
-    //'concatCss',
-    'imagemin',
-    'copy',
-    'bower',
-    'inject',
-    'usemin',
-    'connect'
+gulp.task('serve:local', sequence(
+    'del:dist', ['coffee', 'jade', 'imagemin', 'sass', 'copyFonts'], ['env', 'autoprefixer'], 'inject', 'bower', 'connect', 'watch'
+));
+gulp.task('serve:dev', sequence(
+    'del:dist', ['coffee', 'jade', 'imagemin', 'sass', 'copyFonts'], ['env', 'autoprefixer'], 'inject', 'bower', 'usemin', 'del:clean'
+));
+gulp.task('serve:qa', sequence(
+    'del:dist', ['coffee', 'jade', 'imagemin', 'sass', 'copyFonts'], ['env', 'autoprefixer'], 'inject', 'bower', 'usemin', 'del:clean'
+));
+gulp.task('serve:prod', sequence(
+    'del:dist', ['coffee', 'jade', 'imagemin', 'sass', 'copyFonts'], ['env', 'autoprefixer'], 'inject', 'bower', 'usemin', 'del:clean'
 ));

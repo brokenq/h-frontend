@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "h-frontend",
-      "script": "./bin/www",
+      "script": "./server.js",
       "source_map_support": true,
       "env": {
         "COMMON_VARIABLE": true

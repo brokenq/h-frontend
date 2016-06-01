@@ -13,7 +13,7 @@ include ../../../libs/mixins/preview
           .info
             .name
               span(ng-bind="report.content.liveReport.posterName")
-              img(ng-src="libs/images/ico-{{report.content.liveReport.fromType.toLowerCase()}}.png")
+              img(ng-src="/libs/images/ico-{{report.content.liveReport.fromType.toLowerCase()}}.png")
             .time
               span(ng-bind="report.postTime | timeConvert")
               span @{{report.content.liveReport.checkPointName}}阶段
@@ -42,7 +42,7 @@ include ../../../libs/mixins/preview
           .info
             .name
               span(ng-bind="report.content.inspectorName")
-              img(ng-src="libs/images/ico-check.png")
+              img(ng-src="/libs/images/ico-check.png")
             .time
               span(ng-bind="report.postTime | timeConvert")
               span @{{report.content.checkPointName}}阶段
